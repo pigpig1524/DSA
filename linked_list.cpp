@@ -82,5 +82,6 @@ int main()
     list l;
     input(l);
     output(l);
+    cout << "Xong";
     return 0;
 }
