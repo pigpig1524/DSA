@@ -29,6 +29,7 @@ void initList(list &l)
 
 void addFirst(list &l, node* p)
 {
+    p->next = l.head;
     l.head = p;
     if (l.tail == NULL)
         l.tail = l.head;
@@ -45,14 +46,41 @@ void addLast(list &l, node* p)
     }
 }
 
+void input(list &l)
+{
+    int n;
+    cout << "Nhap so luong phan tu: ";
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        int num;
+        cout << "Nhap gia tri: ";
+        cin >> num;
+        addLast(l, createNode(num));
+    }
+}
+
+void output(list l)
+{
+    cout << "Current list: ";
+    if (l.head == NULL)
+    {
+        cout << "!empty\n";
+        return;
+    }
+    node* cur = l.head;
+    while (cur != NULL)
+    {
+        cout << cur->key << " -> ";
+        cur = cur->next;
+    }
+    cout << endl;
+}
+
 int main()
 {
-    cout << "-- Chuong trinh ve danh sach lien ket don --\n";
-    cout << "Nhap mot gia tri: ";
-    int num;
-    cin >> num;
     list l;
-    initList(l);
-    addFirst(l, createNode(num));
+    input(l);
+    output(l);
     return 0;
 }
