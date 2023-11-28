@@ -22,7 +22,7 @@ struct list
     node* tail;
 };
 
-void initList(list &l)
+void init(list &l)
 {
     l.head = l.tail = NULL;
 }
@@ -44,6 +44,24 @@ void addLast(list &l, node* p)
         l.tail->next = p;
         l.tail = p;
     }
+}
+
+void reverse(list &l)
+{
+    if (l.head == NULL)
+        return;
+    node* cur = l.head;
+    node* tmp = NULL;
+    while (cur != NULL)
+    {
+        node* next = cur->next;
+        cur->next = tmp;
+        tmp = cur;
+        cur = next;
+    }
+    tmp = l.head;
+    l.head = l.tail;
+    l.tail = tmp;
 }
 
 void input(list &l)
@@ -80,8 +98,12 @@ void output(list l)
 int main()
 {
     list l;
+    init(l);
+    cout << "-- Khoi ta linked list --\n";
     input(l);
     output(l);
-    cout << "Xong";
+    cout << "-- Dao chieu list --\n";
+    reverse(l);
+    output(l);
     return 0;
 }
