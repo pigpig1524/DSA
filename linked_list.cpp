@@ -27,13 +27,22 @@ void initList(list &l)
     l.head = l.tail = NULL;
 }
 
-void addFirst(list &l, int data)
+void addFirst(list &l, node* p)
 {
-    node* p = createNode(data);
-    p->next = l.head;
     l.head = p;
     if (l.tail == NULL)
         l.tail = l.head;
+}
+
+void addLast(list &l, node* p)
+{
+    if (l.head == NULL)
+        addFirst(l, p);
+    else
+    {
+        l.tail->next = p;
+        l.tail = p;
+    }
 }
 
 int main()
@@ -44,6 +53,6 @@ int main()
     cin >> num;
     list l;
     initList(l);
-    addFirst(l, num);
+    addFirst(l, createNode(num));
     return 0;
 }
