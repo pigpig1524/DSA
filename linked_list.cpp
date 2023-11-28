@@ -64,6 +64,36 @@ void reverse(list &l)
     l.tail = tmp;
 }
 
+void insertOrder(list &l, node* p)
+{
+    /* 
+        Gia su list dc sap xep tang dan;
+        chen p vao list sao cho van giu dc thu tu
+    */
+   if (l.head == NULL)
+   {
+        addFirst(l, p);
+        return;
+   }
+   if (l.head->key >= p->key)
+   {
+        addFirst(l, p);
+        return;
+   }
+   node* cur = l.head;
+   while (cur->next != NULL)
+   {
+        if (p->key <= cur->next->key)
+        {
+            p->next = cur->next;
+            cur->next = p;
+            return;
+        }
+        cur = cur->next;
+   }
+   addLast(l, p);
+}
+
 void input(list &l)
 {
     int n;
@@ -98,12 +128,18 @@ void output(list l)
 int main()
 {
     list l;
+    int num;
     init(l);
     cout << "-- Khoi ta linked list --\n";
     input(l);
     output(l);
     cout << "-- Dao chieu list --\n";
     reverse(l);
+    output(l);
+    cout << "-- Them giu thu tu --\n";
+    cout << "Nhap gia tri chen: ";
+    cin >> num;
+    insertOrder(l, createNode(num));
     output(l);
     return 0;
 }
