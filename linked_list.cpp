@@ -57,6 +57,21 @@ node* findNode(list &l, int key)
     return NULL;
 }
 
+int index(list &l, int key)
+{
+    node* cur = l.head;
+    int res = 0;
+    while (cur != NULL)
+        if (cur->key == key)
+            return res;
+        else
+        {
+            res += 1;
+            cur = cur->next;
+        }
+    return -1;
+}
+
 void reverse(list &l)
 {
     if (l.head == NULL)
@@ -73,6 +88,28 @@ void reverse(list &l)
     tmp = l.head;
     l.head = l.tail;
     l.tail = tmp;
+}
+
+void removeTag(list &l, int key)
+{
+    if (l.head == NULL)
+        return;
+    if (l.head->key == key)
+    {
+        l.head = l.head->next;
+        return;
+    }
+    node* cur = l.head;
+    while (cur->next != NULL)
+        if (cur->next->key == key)
+        {
+            cur->next = cur->next->next;
+            if (cur->next == NULL)
+                l.tail = cur;
+            return;
+        }
+        else
+            cur = cur->next;
 }
 
 void insertOrder(list &l, node* p)
@@ -143,12 +180,7 @@ int main()
     init(l);
     cout << "-- Khoi tao linked list --\n";
     input(l);
-    cout << "Nhap gia tri muon tim: ";
-    cin >> num;
-    node* p = findNode(l, num);
-    if (p == NULL)
-        cout << -1;
-    else   
-        cout << p->key;
+    output(l);
+
     return 0;
 }
