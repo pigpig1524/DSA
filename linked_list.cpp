@@ -46,6 +46,17 @@ void addLast(list &l, node* p)
     }
 }
 
+node* findNode(list &l, int key)
+{
+    node* cur = l.head;
+    while (cur != NULL)
+        if (cur->key == key)
+            return cur;
+        else
+            cur = cur->next;
+    return NULL;
+}
+
 void reverse(list &l)
 {
     if (l.head == NULL)
@@ -130,16 +141,14 @@ int main()
     list l;
     int num;
     init(l);
-    cout << "-- Khoi ta linked list --\n";
+    cout << "-- Khoi tao linked list --\n";
     input(l);
-    output(l);
-    cout << "-- Dao chieu list --\n";
-    reverse(l);
-    output(l);
-    cout << "-- Them giu thu tu --\n";
-    cout << "Nhap gia tri chen: ";
+    cout << "Nhap gia tri muon tim: ";
     cin >> num;
-    insertOrder(l, createNode(num));
-    output(l);
+    node* p = findNode(l, num);
+    if (p == NULL)
+        cout << -1;
+    else   
+        cout << p->key;
     return 0;
 }
